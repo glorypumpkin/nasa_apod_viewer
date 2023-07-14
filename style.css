@@ -1,0 +1,102 @@
+:root {
+    --primary-color: #201f41;
+    --secondary-color: #422d53;
+    --third-color: #912e54;
+    --fourth-color: #d1788f;
+    --fifth-color: #dd7c86;
+}
+
+body {
+    background-color: var(--primary-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: var(--secondary-color);
+    border-radius: 15px;
+    width: 100%;
+    /* max-height: 100vh; */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+}
+
+.date-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.date-form {
+    padding: 10px 339px;
+    background-color: var(--third-color);
+    border-radius: 15px;
+    gap: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+#show-pic {
+    padding: 7px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: var(--fourth-color);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.pic {
+    max-width: 1000px;
+}
+
+.pic img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.ocean {
+    height: 250px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    bottom: 0;
+    /* background-size: 100% 100%; */
+    background: url("wave.svg");
+    /*animation speed*/
+}
