@@ -1,12 +1,15 @@
+const api_key = '9ygtHY1HG3urKuo3cTulvdht38J0CksPNIdS8omh';
 // day picker
 
 const day_input = document.getElementById('day');
 const month_input = document.getElementById('month');
 const year_input = document.getElementById('year');
+const show_button = document.getElementById('show-pic');
+const picture = document.getElementById('apod');
 
 // fill the day <select> with all the days
 
-function fill_days() {
+function fillDays() {
 
     for (let i = 1; i <= 31; i++) {
         let option = document.createElement('option');
@@ -18,7 +21,7 @@ function fill_days() {
 
 // fill the month <select> with all the months
 
-function fill_months() {
+function fillMonths() {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December'];
     for (let i = 0; i < months.length; i++) {
         let option = document.createElement('option');
@@ -30,7 +33,7 @@ function fill_months() {
 
 // fill the year <select> with all the years
 
-function fill_years() {
+function fillYears() {
     const min_year = 1995;
     const max_year = new Date().getFullYear();
 
@@ -42,7 +45,15 @@ function fill_years() {
     }
 }
 
-function setDay(date) {
+function getDate() {
+    const day = day_input.value;
+    const month = month_input.value;
+    const year = year_input.value;
+
+    return `${year}-${month}-${day}`;
+}
+
+function setDate(date) {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
@@ -52,13 +63,42 @@ function setDay(date) {
     year_input.value = year;
 }
 
+async function fetchPicture(date) {
+    const url = 'https://api.nasa.gov/planetary/apod?' + new URLSearchParams({
+        date: date,
+        api_key: api_key
+    });
+    console.log(url);
+    const response = await fetch(url);
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+function displayPicture(url) {
+    picture.src = url;
+}
+
+async function showButtonClick() {
+    // get the values from the <select> elements
+    const date = getDate();
+    // contact the NASA API
+    const result = await fetchPicture(date);
+    // display the picture
+    const url = result.url;
+    displayPicture(url);
+}
+
+show_button.addEventListener('click', showButtonClick);
+
 function main() {
-    fill_days();
-    fill_months();
-    fill_years();
+    fillDays();
+    fillMonths();
+    fillYears();
 
     const date = new Date();
-    setDay(date);
+    setDate(date);
 }
 
 main();
