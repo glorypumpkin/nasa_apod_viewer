@@ -6,6 +6,7 @@ const month_input = document.getElementById('month');
 const year_input = document.getElementById('year');
 const show_button = document.getElementById('show-pic');
 const picture = document.getElementById('apod');
+const loading = document.querySelector('.loading-screen');
 
 // fill the day <select> with all the days
 
@@ -80,7 +81,8 @@ function displayPicture(url) {
     picture.src = url;
 }
 
-async function showButtonClick() {
+async function fetchAndSetAPOD() {
+    showLoadingAnimation();
     // get the values from the <select> elements
     const date = getDate();
     // contact the NASA API
@@ -88,9 +90,19 @@ async function showButtonClick() {
     // display the picture
     const url = result.url;
     displayPicture(url);
+    picture.classList.remove('hidden');
+    hideLoadingAnimation();
 }
 
-show_button.addEventListener('click', showButtonClick);
+function showLoadingAnimation() {
+    loading.classList.remove('hidden');
+}
+
+function hideLoadingAnimation() {
+    loading.classList.add('hidden');
+}
+
+show_button.addEventListener('click', fetchAndSetAPOD);
 
 function main() {
     fillDays();
@@ -99,6 +111,7 @@ function main() {
 
     const date = new Date();
     setDate(date);
+    fetchAndSetAPOD();
 }
 
 main();
