@@ -91,8 +91,14 @@ async function fetchAndSetAPOD() {
     const url = result.url;
     displayPicture(url);
     picture.classList.remove('hidden');
+
+}
+
+function onImageLoaded() {
     hideLoadingAnimation();
 }
+
+picture.addEventListener('load', onImageLoaded);
 
 function showLoadingAnimation() {
     loading.classList.remove('hidden');

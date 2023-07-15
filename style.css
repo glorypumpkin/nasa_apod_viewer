@@ -61,6 +61,8 @@ select {
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(22, 2, 2, 0.336);
+    border-radius: 15px;
 }
 
 #loading-icon {
@@ -124,7 +126,7 @@ select {
     max-width: 1000px;
 }
 
-.pic img {
+#apod {
     width: 100%;
     height: auto;
     border-radius: 15px;
