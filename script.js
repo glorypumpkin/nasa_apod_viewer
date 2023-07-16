@@ -7,6 +7,9 @@ const year_input = document.getElementById('year');
 const show_button = document.getElementById('show-pic');
 const picture = document.getElementById('apod');
 const loading = document.querySelector('.loading-screen');
+const left_arrow = document.getElementById('left-arrow');
+const right_arrow = document.getElementById('right-arrow');
+const no_image = document.getElementById('no-image-message');
 
 // fill the day <select> with all the days
 
@@ -86,29 +89,78 @@ async function fetchAndSetAPOD() {
     // get the values from the <select> elements
     const date = getDate();
     // contact the NASA API
-    const result = await fetchPicture(date);
-    // display the picture
-    const url = result.url;
-    displayPicture(url);
-    picture.classList.remove('hidden');
+    is_date_ok = checkDate(date);
+    if (is_date_ok) {
+        const result = await fetchPicture(date);
+        // display the picture
+        const url = result.url;
+        displayPicture(url);
+        picture.classList.remove('hidden');
 
+    }
+    else {
+        // alert('You cannot go to the future!');
+        onImageLoadError();
+    }
 }
+
 
 function onImageLoaded() {
     hideLoadingAnimation();
+    no_image.classList.add('hidden');
+}
+
+function onImageLoadError() {
+    hideLoadingAnimation();
+    picture.classList.add('hidden');
+    no_image.classList.remove('hidden');
 }
 
 picture.addEventListener('load', onImageLoaded);
 
 function showLoadingAnimation() {
     loading.classList.remove('hidden');
+    left_arrow.classList.add('hidden');
+    right_arrow.classList.add('hidden');
 }
 
 function hideLoadingAnimation() {
     loading.classList.add('hidden');
+    left_arrow.classList.remove('hidden');
+    right_arrow.classList.remove('hidden');
 }
 
 show_button.addEventListener('click', fetchAndSetAPOD);
+
+function checkDate(date) {
+    const date_obj = new Date(date);
+    const today = new Date();
+    if (date_obj > today) {
+        return false;
+    }
+    return true;
+}
+
+function onLeftArrowClicked() {
+    const date = getDate();
+    const date_obj = new Date(date);
+    date_obj.setDate(date_obj.getDate() - 1);
+    setDate(date_obj);
+    fetchAndSetAPOD();
+}
+
+left_arrow.addEventListener('click', onLeftArrowClicked);
+
+function onRightArrowClicked() {
+    const date = getDate();
+    const date_obj = new Date(date);
+    date_obj.setDate(date_obj.getDate() + 1);
+    setDate(date_obj);
+    fetchAndSetAPOD();
+}
+
+right_arrow.addEventListener('click', onRightArrowClicked);
+
 
 function main() {
     fillDays();

@@ -27,7 +27,7 @@
                 <select name="day" id="day"></select>
                 <select name="month" id="month"></select>
                 <select name="year" id="year"></select>
-                <button id="show-pic">Show Picture
+                <button class="func-buttons" id="show-pic">Show Picture
                 </button>
             </div>
         </div>
@@ -43,7 +43,11 @@
                             <img src="satellite.svg" id="loading-icon">
                         </div>
                     </div>
-                    <img src="" alt="APOD" id="apod" class="hidden">
+                    <img src="" alt="APOD" id="apod">
+                    <div class="hidden" id="no-image-message">
+                        <p>No image for this date</p>
+                        <button class="func-buttons" id="return-to-today">Today</button>
+                    </div>
                 </div>
             </div>
 

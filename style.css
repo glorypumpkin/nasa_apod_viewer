@@ -64,10 +64,12 @@ select {
 
 .loading-screen {
     position: absolute;
+    bottom: 7px;
+    right: 0;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     background-color: rgba(22, 2, 2, 0.336);
     border-radius: 15px;
 }
@@ -93,7 +95,7 @@ select {
     }
 }
 
-#show-pic {
+.func-buttons {
     padding: 7px;
     border-radius: 15px;
     border: none;
@@ -132,7 +134,7 @@ select {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .pic-display {
@@ -147,11 +149,17 @@ select {
 
 .pic {
     max-width: 1000px;
+    flex-grow: 1;
+}
+
+#no-image-message {
+    /* transform: translate(-50%, -50%); */
+    font-weight: bold;
 }
 
 #apod {
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 15px;
 }
 
