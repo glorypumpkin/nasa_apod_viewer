@@ -120,9 +120,11 @@ select {
 }
 
 .arrows img {
+    min-width: 20px;
     width: 100%;
     height: 100%;
     cursor: pointer;
+    position: relative;
 }
 
 #right-arrow {
@@ -155,6 +157,52 @@ select {
 #no-image-message {
     /* transform: translate(-50%, -50%); */
     font-weight: bold;
+}
+
+#no-image-message p {
+    text-align: center;
+}
+
+#tardis {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    display: block;
+    /*allign center*/
+    margin-left: auto;
+    margin-right: auto;
+    animation: rotate 2s linear infinite;
+    /* animation-timing-function: cubic-bezier(0.24, 0, 0.38, 1); */
+}
+
+@keyframes rotate {
+
+    0% {
+        transform: rotateY(0);
+    }
+
+    25% {
+        transform: rotateY(-45deg);
+    }
+
+    50% {
+        transform: rotateY(0);
+    }
+
+    75% {
+        transform: rotateY(45deg);
+    }
+
+    100% {
+        transform: rotateY(0);
+    }
+}
+
+#today-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
 }
 
 #apod {

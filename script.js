@@ -10,6 +10,8 @@ const loading = document.querySelector('.loading-screen');
 const left_arrow = document.getElementById('left-arrow');
 const right_arrow = document.getElementById('right-arrow');
 const no_image = document.getElementById('no-image-message');
+const pic_elements = document.querySelector('.pic-desc');
+const today_button = document.getElementById('today-button');
 
 // fill the day <select> with all the days
 
@@ -80,7 +82,8 @@ async function fetchPicture(date) {
     return data;
 }
 
-function displayPicture(url) {
+function displayPictureElements(title, explanation, url) {
+    pic_elements.innerHTML = `<h2>${title}</h2><p>${explanation}</p>`;
     picture.src = url;
 }
 
@@ -92,11 +95,12 @@ async function fetchAndSetAPOD() {
     is_date_ok = checkDate(date);
     if (is_date_ok) {
         const result = await fetchPicture(date);
-        // display the picture
+        // display the picture, the title and the explanation
+        const title = result.title;
+        const explanation = result.explanation;
         const url = result.url;
-        displayPicture(url);
+        displayPictureElements(title, explanation, url);
         picture.classList.remove('hidden');
-
     }
     else {
         // alert('You cannot go to the future!');
@@ -104,6 +108,11 @@ async function fetchAndSetAPOD() {
     }
 }
 
+function returnToTodayButton() {
+    const date = new Date();
+    setDate(date);
+    fetchAndSetAPOD();
+}
 
 function onImageLoaded() {
     hideLoadingAnimation();
@@ -112,9 +121,12 @@ function onImageLoaded() {
 
 function onImageLoadError() {
     hideLoadingAnimation();
+    pic_elements.innerHTML = '';
     picture.classList.add('hidden');
     no_image.classList.remove('hidden');
 }
+
+today_button.addEventListener('click', returnToTodayButton);
 
 picture.addEventListener('load', onImageLoaded);
 
@@ -135,7 +147,8 @@ show_button.addEventListener('click', fetchAndSetAPOD);
 function checkDate(date) {
     const date_obj = new Date(date);
     const today = new Date();
-    if (date_obj > today) {
+    //if date is in the future or if date is lower than 20-06-1995 (the first picture) return false
+    if ((date_obj > today) || (date_obj < new Date('1995-06-19'))) {
         return false;
     }
     return true;
