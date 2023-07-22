@@ -22,7 +22,7 @@ body {
     border-radius: 15px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 25px;
     position: relative;
     box-sizing: border-box;
 }
@@ -32,6 +32,17 @@ body {
     .container {
         width: 1200px;
     }
+}
+
+.desc {
+    font-size: 1.1rem;
+}
+
+h1,
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .date-container {
