@@ -228,5 +228,5 @@ select {
     position: fixed;
     bottom: 0;
     overflow: hidden;
-    background: url("wave.svg");
+    background: url("images/wave.svg");
 }
